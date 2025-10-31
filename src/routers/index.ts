@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import AuthRouter from "./auth.route";
 import TransactionRouter from "./transaction.route";
 import AdminRouter from "./admin.route";

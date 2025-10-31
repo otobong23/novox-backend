@@ -6,7 +6,7 @@ import { ModelModule } from '../models/Model.module'
 import * as crypto from 'crypto';
 import { IUser } from '../models/user/userModel.types'
 import doHash from '../helpers/hashing'
-import sendResetMail from 'mailers/mailer'
+import sendResetMail from '../mailers/mailer'
 import CrewService from './Crew.service'
 
 dotenv.config()

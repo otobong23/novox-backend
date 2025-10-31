@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser'
 import http from 'http';
 import mongoose from 'mongoose';
 import { errorHandler } from './Errors/ErrorHandler';
-import AppRouter from './routes';
+import AppRouter from './routers';
 
 dotenv.config()
 const app = express()
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
    res.send('Welcome to the backend of the fintech application')
 })
-app.use('/', AppRouter)
+app.use('/api', AppRouter)
 app.use(errorHandler)
 
 const server = http.createServer(app)

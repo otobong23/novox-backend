@@ -14,13 +14,11 @@ dotenv.config()
 const to = process.env.EMAIL_USER!
 
 export class TransactionServiceFunction extends ModelModule {
-   private crewService: typeof CrewService
    private adminModel: typeof AdminModel
    private httpService: typeof axios
 
    constructor() {
       super();
-      this.crewService = CrewService
       this.adminModel = AdminModel
       this.httpService = axios
    }
@@ -132,7 +130,7 @@ export class TransactionServiceFunction extends ModelModule {
       if (existingUser.ActivateBot) {
          existingUser.balance += amount;
          existingUser.totalYield += amount;
-         await this.crewService.awardReferralBonus(existingUser.userID, amount, "mining_profit")
+         await CrewService.awardReferralBonus(existingUser.userID, amount, "mining_profit")
          const newTransaction = new this.userTransactionModel({ email, type: 'yield', amount, status: 'completed', date: new Date() })
          await newTransaction.save()
          await existingUser.save();

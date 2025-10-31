@@ -3,17 +3,17 @@ import { IUser } from 'models/user/userModel.types';
 import AdminService from 'services/Admin.service';
 
 class AdminController {
-  private adminService: typeof AdminService;
+  // private adminService: typeof AdminService;
 
-  constructor() {
-    this.adminService = AdminService;
-  }
+  // constructor() {
+  //   this.adminService = AdminService;
+  // }
 
   // ─────────────── ADMIN ───────────────
   async login(req: Request, res: Response, next: NextFunction) {
     try {
       const adminLogindto: { username: string, password: string } = req.body;
-      const result = await this.adminService.login(adminLogindto);
+      const result = await AdminService.login(adminLogindto);
       res.json(result);
     } catch (error) {
       next(error);
@@ -32,7 +32,7 @@ class AdminController {
         email: string,
         password: string
       } = req.body;
-      const result = await this.adminService.updateAdmin(email, adminDto);
+      const result = await AdminService.updateAdmin(email, adminDto);
       res.json(result);
     } catch (error) {
       next(error);
@@ -41,7 +41,7 @@ class AdminController {
 
   async getAdmin(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.adminService.getAdmin(req.user.email);
+      const result = await AdminService.getAdmin(req.user.email);
       res.json(result);
     } catch (error) {
       next(error);
@@ -51,7 +51,7 @@ class AdminController {
   // ─────────────── USERS ───────────────
   async getTotalUsers(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.adminService.getTotalUsers();
+      const result = await AdminService.getTotalUsers();
       res.json(result);
     } catch (error) {
       next(error);
@@ -62,7 +62,7 @@ class AdminController {
     try {
       const limit = parseInt(req.query.limit as string) || 50;
       const page = parseInt(req.query.page as string) || 1;
-      const result = await this.adminService.getAllUsers(limit, page);
+      const result = await AdminService.getAllUsers(limit, page);
       res.json(result);
     } catch (error) {
       next(error);
@@ -72,7 +72,7 @@ class AdminController {
   async getUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { email } = req.params;
-      const result = await this.adminService.getUser(email);
+      const result = await AdminService.getUser(email);
       res.json(result);
     } catch (error) {
       next(error);
@@ -83,7 +83,7 @@ class AdminController {
     try {
       const { email } = req.params;
       const updateProfileDto: IUser = req.body;
-      const result = await this.adminService.updateUser(email, updateProfileDto);
+      const result = await AdminService.updateUser(email, updateProfileDto);
       res.json(result);
     } catch (error) {
       next(error);
@@ -93,7 +93,7 @@ class AdminController {
   async getUserByuserID(req: Request, res: Response, next: NextFunction) {
     try {
       const { userID } = req.query;
-      const result = await this.adminService.getUserByuserID(userID as string);
+      const result = await AdminService.getUserByuserID(userID as string);
       res.json(result);
     } catch (error) {
       next(error);
@@ -103,7 +103,7 @@ class AdminController {
   async searchUsers(req: Request, res: Response, next: NextFunction) {
     try {
       const { keyword } = req.query;
-      const result = await this.adminService.searchUsers(keyword as string);
+      const result = await AdminService.searchUsers(keyword as string);
       res.json(result);
     } catch (error) {
       next(error);
@@ -113,7 +113,7 @@ class AdminController {
   // ─────────────── CREWS ───────────────
   async getTotalCrew(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.adminService.getTotalCrews();
+      const result = await AdminService.getTotalCrews();
       res.json(result);
     } catch (error) {
       next(error);
@@ -124,7 +124,7 @@ class AdminController {
     try {
       const limit = parseInt(req.query.limit as string) || 50;
       const page = parseInt(req.query.page as string) || 1;
-      const result = await this.adminService.getAllCrews(limit, page);
+      const result = await AdminService.getAllCrews(limit, page);
       res.json(result);
     } catch (error) {
       next(error);
@@ -134,7 +134,7 @@ class AdminController {
   async getUserCrew(req: Request, res: Response, next: NextFunction) {
     try {
       const { userID } = req.query;
-      const result = await this.adminService.getUserCrew(userID as string);
+      const result = await AdminService.getUserCrew(userID as string);
       res.json(result);
     } catch (error) {
       next(error);
@@ -144,7 +144,7 @@ class AdminController {
   async searchCrews(req: Request, res: Response, next: NextFunction) {
     try {
       const { keyword } = req.query;
-      const result = await this.adminService.searchCrews(keyword as string);
+      const result = await AdminService.searchCrews(keyword as string);
       res.json(result);
     } catch (error) {
       next(error);
@@ -156,7 +156,7 @@ class AdminController {
     try {
       const limit = parseInt(req.query.limit as string) || 50;
       const page = parseInt(req.query.page as string) || 1;
-      const result = await this.adminService.getTransactions(limit, page);
+      const result = await AdminService.getTransactions(limit, page);
       res.json(result);
     } catch (error) {
       next(error);
@@ -168,7 +168,7 @@ class AdminController {
       const { email } = req.query;
       const limit = parseInt(req.query.limit as string) || 50;
       const page = parseInt(req.query.page as string) || 1;
-      const result = await this.adminService.getUserTransactions(email as string, limit, page);
+      const result = await AdminService.getUserTransactions(email as string, limit, page);
       res.json(result);
     } catch (error) {
       next(error);
@@ -184,7 +184,7 @@ class AdminController {
         amount?: number,
         action?: 'minus' | 'add'
       } = req.body;
-      const result = await this.adminService.updateTransaction(
+      const result = await AdminService.updateTransaction(
         email as string,
         transactionID as string,
         updateData
@@ -199,7 +199,7 @@ class AdminController {
   async detachUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { userID } = req.body;
-      const result = await this.adminService.deleteUserCascade(userID);
+      const result = await AdminService.deleteUserCascade(userID);
       res.json(result);
     } catch (error) {
       next(error);
@@ -208,7 +208,7 @@ class AdminController {
 
   async globalData(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = await this.adminService.globalData();
+      const result = await AdminService.globalData();
       res.json(result);
     } catch (error) {
       next(error);
